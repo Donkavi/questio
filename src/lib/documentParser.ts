@@ -1,3 +1,16 @@
+// Polyfill for pdf-parse which depends on browser-only globals in some environments
+if (typeof global !== 'undefined') {
+    if (!(global as any).DOMMatrix) {
+        (global as any).DOMMatrix = class DOMMatrix { constructor() { } };
+    }
+    if (!(global as any).DOMPoint) {
+        (global as any).DOMPoint = class DOMPoint { constructor() { } };
+    }
+    if (!(global as any).DOMRect) {
+        (global as any).DOMRect = class DOMRect { constructor() { } };
+    }
+}
+
 const pdfParse = require("pdf-parse");
 const mammoth = require("mammoth");
 
